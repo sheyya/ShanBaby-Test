@@ -53,6 +53,7 @@ exports.registerUser = function (req, res, next) {
             return next(err);
           }
           console.log("New user register");
+          res.status(201).send("Success");
         });
       } else {
         res.status(403).send("Already have");
@@ -82,7 +83,8 @@ exports.signIn = function (req, res, next) {
       console.log("REQUEST -------------------------------------------");
 
       var _signuser_hashed_password = req.body.uPass;
-
+      var userBrowser = req.body.userBrowser;
+      console.log(userBrowser);
       var _user_hashed_password = user[0].password;
       var isAvalabel = _signuser_hashed_password.localeCompare(
         _user_hashed_password,
@@ -104,6 +106,20 @@ exports.signIn = function (req, res, next) {
             expiresIn: "240h",
           }
         );
+        var today = new Date();
+        // store sign in token in userr data
+
+        var newSign_in_user = new SignInToken({
+          email: req.body.uEmail,
+          token: token,
+          createdAt: today,
+          browser: userBrowser,
+        });
+        newSign_in_user.save(function (err) {
+          if (err) {
+            return next(err);
+          }
+        });
         return res.status(200).json({
           message: "Auth Sucess",
 
@@ -434,4 +450,66 @@ exports.getAllUsers = function (req, res, next) {
       res.status(200).json(result);
     }
   });
+};
+
+exports.getLastLogin = function (req, res, next) {
+  var email = req.body.uEmail;
+  console.log(email);
+
+  if (email != null || email != undefined) {
+    SignInToken.find({ email: email }, function (err, docs) {
+      try {
+        return res.status(200).json({
+          lastlogin: moment(docs[0].createdAt).format(
+            "MMMM Do YYYY, h:mm:ss a"
+          ),
+          token: docs[0].token,
+          keepme: docs[0].keepme,
+          // userBrowser : doc[0].userBrowser
+        });
+      } catch (error) {
+        return res.status(411).json({
+          message: "No data found",
+          err: error,
+        });
+      }
+    }).sort([
+      ["email", 1],
+      ["createdAt", "desc"],
+    ]);
+  } else {
+    return res.status(201).json({
+      lastlogin: "Please provide email",
+    });
+  }
+};
+exports.getLastLoginForUser = function (req, res, next) {
+  var email = req.body.uEmail;
+  console.log(email);
+
+  if (email != null || email != undefined) {
+    SignInToken.find({ email: email }, function (err, docs) {
+      try {
+        return res.status(200).json({
+          lastlogin: moment(docs[0].createdAt).format(
+            "MMMM Do YYYY, h:mm:ss a"
+          ),
+          browser: docs[0].browser,
+          keepme: docs[0].keepme,
+        });
+      } catch (error) {
+        return res.status(411).json({
+          message: "No data found",
+          err: error,
+        });
+      }
+    }).sort([
+      ["email", 1],
+      ["createdAt", "desc"],
+    ]);
+  } else {
+    return res.status(201).json({
+      lastlogin: "Please provide email",
+    });
+  }
 };

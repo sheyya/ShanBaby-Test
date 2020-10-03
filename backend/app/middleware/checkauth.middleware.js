@@ -25,6 +25,7 @@ module.exports = (req, res, next) => {
         try {
           if (docs.length > 0) {
             next();
+            console.log("working");
           }
           // var dbtoken = docs[0].token
           // var isAvailable = dbtoken.localeCompare(req.body.token, { sensitivity: 'base' })

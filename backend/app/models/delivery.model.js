@@ -10,32 +10,37 @@ let Delivery = new Schema({
   },
   userName: {
     type: String,
-    required: true,
+    // required: true,
+  },
+  orderID: {
+    type: String,
+    // required: true,
   },
   deliveryAddress: {
     type: String,
-    required: true,
+    // required: true,
   },
   products: {
     type: [],
-    required: true,
+    // required: false,
   },
   deliveryMethod: {
     type: String,
-    required: true,
+    // required: true,
   },
   TrackingInfo: {
     type: String,
-    required: true,
   },
   shipped: {
     type: Boolean,
     default: false,
+    required: true,
   },
   recieved: {
     type: Boolean,
     default: false,
+    required: true,
   },
 });
 
-module.exports = mongoose.model("orders", Order);
+module.exports = mongoose.model("delivery", Delivery);

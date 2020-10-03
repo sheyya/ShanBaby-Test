@@ -22,5 +22,27 @@ router.post(
   adminController.getAllUsers
 );
 
+// admin get all users loging browe
+router.post(
+  "/g/all/users/logins",
+  checkRole(["admin"]),
+  checkAuth,
+  adminController.getUsersBrowserDetails
+);
+// admin get all users  time
+router.post(
+  "/g/all/users/time",
+  checkRole(["admin"]),
+  checkAuth,
+  adminController.getUsersLoginTimeDetails
+);
+// admin get all user statics
+router.post("/g/user/stat", adminController.userStat);
+//admin get user registtrion from month
+router.post("/g/user/months", adminController.getUserRegistrationMonths);
+
+router.post("/g/test", adminController.getuserbyMonth);
+router.post("/g/u/test", adminController.newBrowserDetails);
+
 //export router
 module.exports = router;
