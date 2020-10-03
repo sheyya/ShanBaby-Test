@@ -72,9 +72,10 @@ export class MoreDetails extends Component {
       updateOrder({
         id: this.state.id,
         deliveryAddress: this.state.deliveryAddress,
-        shipped: this.state.shipped,
+        shipped: true,
       })
         .then((result) => {
+          console.log(result);
           addDelivery({
             id: this.state.id,
             method: this.state.method,
@@ -106,6 +107,11 @@ export class MoreDetails extends Component {
       });
   };
 
+  // onShip = (e) => {
+  //   e.preventDefault();
+  //   this.setState = { shipped: true };
+  // };
+
   render() {
     const {
       amount,
@@ -114,8 +120,11 @@ export class MoreDetails extends Component {
       userName,
       date,
       products,
-      deleteRequest,
       shipped,
+      deleteRequest,
+      method,
+      trackinginfo,
+      recived,
     } = this.state;
 
     return (
@@ -179,17 +188,32 @@ export class MoreDetails extends Component {
                       />
                     </div>
 
-                    <div className="col-md-12 mb-4">
-                      <h6 className="form-label py-2">Shipped</h6>
+                    <div className="col-md-12">
+                      <h6 className="form-label py-2">Delivery Method</h6>
                       <select
                         className="form-control"
-                        value={shipped}
-                        name="shipped"
+                        value={method}
+                        name="method"
                         onChange={(e) => this.formValueChange(e)}
                       >
-                        <option value="true">Shipped</option>
-                        <option value="false">Not Shipped</option>
+                        <option selected>Select Method</option>
+                        <option value="Pronto">Pronto</option>
+                        <option value="Koombiyo">Koombiyo</option>
+                        <option value="Domex">Domex</option>
+                        <option value="City Pack">City Pack</option>
                       </select>
+                    </div>
+
+                    <div className="col-md-12 mb-4">
+                      <h6 className="form-label py-2">Tracking Info</h6>
+                      <input
+                        type="text"
+                        name="trackinginfo"
+                        value={trackinginfo}
+                        onChange={(e) => this.formValueChange(e)}
+                        placeholder="Insert Tracking Number"
+                        className="form-control"
+                      />
                     </div>
 
                     <div className="col-md-12 mb-2">
@@ -203,7 +227,7 @@ export class MoreDetails extends Component {
                           className="px-4 btn btn-dark  btn-sm bold-normal"
                           type="submit"
                         >
-                          Update
+                          Ship
                         </button>
                         {console.log("Is delete request: ", deleteRequest)}
                         {!deleteRequest ? null : (
@@ -249,7 +273,7 @@ export class MoreDetails extends Component {
   validate = () => {
     console.log("validate submision");
 
-    let { errors, deliveryAddress, shipped } = this.state;
+    let { errors, deliveryAddress } = this.state;
     let count = 0;
 
     if (deliveryAddress.length == 0) {
