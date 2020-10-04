@@ -1,5 +1,5 @@
 const Order = require("../models/order.model");
-
+const Delivery = require("../models/delivery.model");
 exports.Insert = (req, res, next) => {
   console.log(req.body);
 
@@ -113,44 +113,57 @@ exports.GetOrderById = (req, res, next) => {
   });
 };
 
-exports.update = (req, res, next) => {
+exports.update = async (req, res, next) => {
   const id = req.params.id;
 
-  Order.findOne({ _id: id }, (err, found_item) => {
-    if (err) {
-      return next(err);
+  const found_item = await Order.findOne({ _id: id });
+
+  console.log(req.body);
+  //if object not found
+  if (!found_item) {
+    return res.status(404).send();
+  } else {
+    //if address changed
+    if (req.body.deliveryAddress) {
+      found_item.deliveryAddress = req.body.deliveryAddress;
     }
-
-    //if object not found
-    if (!found_item) {
-      res.status(404).send();
-    } else {
-      //if address changed
-      if (req.body.deliveryAddress) {
-        found_item.deliveryAddress = req.body.deliveryAddress;
-      }
-      if (req.body.shipped) {
-        found_item.shipped = req.body.shipped;
-      }
-      if (req.body.deleteRequest) {
-        found_item.deleteRequest = req.body.deleteRequest;
-      }
-
-      found_item.save((err, updated_object) => {
-        if (err) {
-          return next(err);
-        }
-
-        data = {
-          status: "success",
-          code: 200,
-          data: updated_object,
-          message: "Successfully Updated",
-        };
-        res.json(data);
-      });
+    if (req.body.shipped) {
+      found_item.shipped = req.body.shipped;
     }
-  });
+    if (req.body.deleteRequest) {
+      found_item.deleteRequest = req.body.deleteRequest;
+    }
+    const update = await Order.findOneAndUpdate(
+      { _id: id },
+      {
+        deliveryAddress: req.body.deliveryAddress,
+        shipped: req.body.shipped,
+        deleteRequest: found_item.deleteRequest,
+      },
+      {
+        new: true,
+      }
+    );
+    console.log("UPdatred ======================================");
+
+    let deliver = Delivery({
+      deliveryMethod: req.body.method,
+      TrackingInfo: req.body.trackinginfo,
+      recieved: req.body.recieved,
+      orderID: req.body.u_id,
+      userName: req.body.userName,
+      products: req.body.products,
+      shipped: req.body.shipped,
+    });
+
+    const save_res = await deliver.save();
+
+    console.log(save_res);
+
+    return res.status(200).send({
+      msg: "Success",
+    });
+  }
 };
 
 exports.RequestDelete = (req, res, next) => {

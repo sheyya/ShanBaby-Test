@@ -77,3 +77,63 @@ exports.AddDeliveryInfo = (req, res, next) => {
     }
   });
 };
+
+exports.GetAllWithOrder = (req, res, next) => {
+  Delivery.aggregate([
+    {
+      $lookup: {
+        from: "orders", // collection name in db
+        localField: "orderID",
+        foreignField: "_id",
+        as: "order_details",
+      },
+    },
+    {
+      $project: {
+        order_details: { $arrayElemAt: ["$order_details", 0] },
+        recieved: 1,
+        deliveryMethod: 1,
+        TrackingInfo: 1,
+      },
+    },
+  ]).exec(function (err, result) {
+    if (err) {
+      return next(err);
+    }
+
+    data = {
+      status: "success",
+      code: 200,
+      data: result,
+    };
+
+    res.json(data);
+  });
+};
+
+exports.MarkRecevied = (req, res, next) => {
+  console.log(req.body);
+  Delivery.findOne({ _id: req.body.id }, (err, found_delivery) => {
+    if (err) {
+      return next(err);
+    }
+    if (!found_delivery) {
+      res.status(404).send();
+    } else {
+      found_delivery.recieved = true;
+      found_delivery.save((err, results) => {
+        if (err) {
+          return next(err);
+        }
+
+        data = {
+          status: "success",
+          code: 200,
+          data: results,
+          message: "Successfully Delivered",
+        };
+        res.json(data);
+      });
+    }
+  });
+};

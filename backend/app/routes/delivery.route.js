@@ -5,5 +5,7 @@ const checkAuth = require("../middleware/checkauth.middleware");
 
 //add delivery info
 router.post("/add", Delivery.AddDeliveryInfo);
+router.get("/GetAll/", Delivery.GetAllWithOrder);
+router.post("/received", Delivery.MarkRecevied);
 
 module.exports = router;

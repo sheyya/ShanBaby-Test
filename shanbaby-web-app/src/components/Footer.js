@@ -74,9 +74,9 @@ class Footer extends React.Component {
                   </div>
                 </div>
                 <ul>
-                  <li>Address: No 306/3A, Malabe, SL</li>
-                  <li>Phone: (+94)71 123 4567</li>
-                  <li>Email: info@fashi.com</li>
+                  <li>Address: No 217, Mahasen MW, SL</li>
+                  <li>Phone: (+94)76 6191256</li>
+                  <li>Email: info@shanbaby.lk</li>
                 </ul>
                 <div className="footer-social">
                   <a href="">
@@ -94,8 +94,8 @@ class Footer extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="col-lg-2 offset-lg-1">
-              <div className="footer-widget">
+            {/* <div className="col-lg-2 offset-lg-1"> */}
+            {/* <div className="footer-widget">
                 <h5>Information</h5>
                 <ul>
                   <li>
@@ -111,9 +111,9 @@ class Footer extends React.Component {
                     <Link to="/tos">Terms and Conditions</Link>
                   </li>
                 </ul>
-              </div>
-            </div>
-            <div className="col-lg-2">
+              </div> */}
+            {/* </div> */}
+            {/* <div className="col-lg-2">
               <div className="footer-widget">
                 <h5></h5>
                 <ul>
@@ -149,7 +149,7 @@ class Footer extends React.Component {
                   <button type="submit">Subscribe</button>
                 </form>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </footer>

@@ -16,12 +16,6 @@ import AdminLogin from "../views/admin/adminlogin";
 //single product page
 import SingleProduct from "../views/products/singleProduct";
 
-// statis page
-import ContactUs from "../views/Staticspages/contactus";
-import AboutUs from "../views/Staticspages/aboutus";
-import TOS from "../views/Staticspages/tos";
-import PP from "../views/Staticspages/pp";
-
 let indexRoutes = [
   {
     path: "/",
@@ -50,30 +44,30 @@ let indexRoutes = [
     component: AdminLogin,
     exact: true,
   },
-  {
-    path: "/contactus",
-    name: "Contact_Us",
-    component: ContactUs,
-    exact: true,
-  },
-  {
-    path: "/aboutus",
-    name: "AboutUs",
-    component: AboutUs,
-    exact: true,
-  },
-  {
-    path: "/pp",
-    name: "PP",
-    component: PP,
-    exact: true,
-  },
-  {
-    path: "/tos",
-    name: "TOS",
-    component: TOS,
-    exact: true,
-  },
+  // {
+  //   path: "/contactus",
+  //   name: "Contact_Us",
+  //   component: ContactUs,
+  //   exact: true,
+  // },
+  // {
+  //   path: "/aboutus",
+  //   name: "AboutUs",
+  //   component: AboutUs,
+  //   exact: true,
+  // },
+  // {
+  //   path: "/pp",
+  //   name: "PP",
+  //   component: PP,
+  //   exact: true,
+  // },
+  // {
+  //   path: "/tos",
+  //   name: "TOS",
+  //   component: TOS,
+  //   exact: true,
+  // },
   {
     path: "/categories/:id",
     name: "Category",

@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import AdminSidebar from "../../components/AdminSidebar";
 import moment from "moment";
-import { getAllOrders } from "../../controllers/Order";
+import {
+  markRecevied,
+  getAllOrdersWithDelivery,
+} from "../../controllers/Delivery";
 
 class allDelivery extends Component {
   constructor(props) {
@@ -14,11 +17,11 @@ class allDelivery extends Component {
   }
 
   componentDidMount() {
-    this.loadOrders();
+    this.loadDelivery();
   }
 
-  loadOrders = () => {
-    getAllOrders()
+  loadDelivery = () => {
+    getAllOrdersWithDelivery()
       .then((result) => {
         console.log(result);
         this.setState({ orders: result });
@@ -39,9 +42,8 @@ class allDelivery extends Component {
     const { orders } = this.state;
     let reversedOrders = orders.reverse();
 
-    let ShippedOrders = reversedOrders.filter((ord) => {
-      return ord.shipped == true;
-    });
+    let ShippedOrders = reversedOrders.filter((ord) => !ord.recieved);
+    let DeliveredOrders = reversedOrders.filter((ord) => ord.recieved);
 
     return (
       <div className="bg-light wd-wrapper">
@@ -53,20 +55,23 @@ class allDelivery extends Component {
                 <h5 className="text-dark bold-normal py-2 bg-white shadow-sm px-2 mt-3 rounded">
                   Deliveries
                 </h5>
+                {/* -------------------------------------------------- */}
                 <div className="col-12 px-0">
                   <div className="card border-0 shadow-sm rounded mt-3 bg-white pb-2">
-                    <h5 className="text-dark bold-normal py-2 bg-white px-2">
+                    <h6 className="text-dark bold-normal py-2 bg-white px-2">
                       Shipped Orders
-                    </h5>
+                    </h6>
                     <div className="table-responsive px-2">
                       <table className="table table-stripped">
                         <thead>
                           <tr>
                             <th scope="col">Date</th>
-                            <th scope="col">Amount</th>
                             <th scope="col">User Name</th>
+                            <th scope="col">Amount</th>
                             <th scope="col">Address</th>
-                            <th scope="col">Actions</th>
+                            <th scope="col">Method</th>
+                            <th scope="col">Tracking No</th>
+                            <th scope="col">Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -78,6 +83,35 @@ class allDelivery extends Component {
                     </div>
                   </div>
                 </div>
+                {/* -------------------------------------------------- */}
+                <div className="col-12 px-0">
+                  <div className="card border-0 shadow-sm rounded mt-3 bg-white pb-2">
+                    <h6 className="text-dark bold-normal py-2 bg-white px-2">
+                      Delivered Orders
+                    </h6>
+                    <div className="table-responsive px-2">
+                      <table className="table table-stripped">
+                        <thead>
+                          <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">User Name</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Method</th>
+                            <th scope="col">Tracking No</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {DeliveredOrders.map((item) =>
+                            this.renderOrdersTable(item)
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                {/* ----------------------------------------------------- */}
               </div>
             </div>
           </div>
@@ -85,31 +119,46 @@ class allDelivery extends Component {
       </div>
     );
   }
+
+  updateReceived = (item) => {
+    markRecevied({ id: item._id })
+      .then((result) => {
+        this.loadDelivery();
+      })
+      .catch((err) => {});
+  };
+
   renderOrdersTable = (item) => {
     return (
-      <tr key={item._id} style={this.getStyle(item)}>
+      <tr key={item._id} style={this.getStyle(item.order_details)}>
         <td>
-          <b>{moment(new Date(item.date)).format("DD , MMM YYYY")}</b>
+          <b>
+            {moment(new Date(item.order_details.date)).format("DD , MMM YYYY")}
+          </b>
         </td>
         <td>
-          <h6 className="form-label">LKR {item.amount}</h6>
+          <h6 className="form-label mt-1">LKR {item.order_details.amount}</h6>
         </td>
-        <td>{item.userName}</td>
-        <td>{item.deliveryAddress}</td>
+        <td>{item.order_details.userName}</td>
+        <td>{item.order_details.deliveryAddress}</td>
+        <td>{item.deliveryMethod}</td>
+        <td>{item.TrackingInfo}</td>
         <td>
-          <button
-            className="btn btn-dark btn-sm px-2 mr-2"
-            onClick={() => this.onClickView(item)}
-          >
-            More Details
-          </button>
+          {!item.recieved ? (
+            <button
+              className="btn btn-light btn-sm px-2 mr-2 btn-outline-dark"
+              onClick={() => this.updateReceived(item)}
+            >
+              Mark Delivered
+            </button>
+          ) : (
+            <span className="bg-success text-white px-2 py-1 rounded">
+              Delivered
+            </span>
+          )}
         </td>
       </tr>
     );
-  };
-
-  onClickView = (item) => {
-    this.props.history.push(`/admin/orders/getOrder/${item._id}`);
   };
 }
 export default withRouter(allDelivery);

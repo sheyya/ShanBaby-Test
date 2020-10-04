@@ -49,7 +49,7 @@ class AdminSidebar extends React.Component {
       <>
         <nav className="navbar navbar-dark bg-dark py-0 shadow-sm  fixed-top">
           <span className="navbar-brand mb-0 h6 text-light ml-2">
-            Fashi Dashboard
+            Dashboard
             <FontAwesomeIcon
               onClick={() =>
                 this.setState({ side_bar_toggle: !this.state.side_bar_toggle })

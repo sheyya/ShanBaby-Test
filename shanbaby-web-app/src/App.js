@@ -10,7 +10,7 @@ import { Provider } from "react-redux";
 import { store, persistor } from "./store/store";
 //custome alert css
 import "./asserts/commoncss/alerts.css";
-
+toast.configure();
 class App extends React.Component {
   render() {
     return (

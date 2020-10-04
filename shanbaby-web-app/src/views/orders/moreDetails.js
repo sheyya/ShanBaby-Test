@@ -31,7 +31,7 @@ export class MoreDetails extends Component {
       province: "",
       method: "",
       trackinginfo: "",
-      recived: bool,
+      recived: false,
     };
   }
 
@@ -64,32 +64,56 @@ export class MoreDetails extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onFormSubmit = (e) => {
+  onFormSubmit = async (e) => {
     e.preventDefault();
+
+    console.log(this.state.id);
+    console.log(this.state.deliveryAddress);
+    console.log(this.state.id);
+    console.log(this.state.method);
+    console.log(this.state.trackinginfo);
+    console.log(this.state.trackinginfo);
 
     console.log("Order ID: ", this.state.id);
     if (this.validate()) {
-      updateOrder({
+      const res = await updateOrder({
         id: this.state.id,
         deliveryAddress: this.state.deliveryAddress,
         shipped: true,
-      })
-        .then((result) => {
-          console.log(result);
-          addDelivery({
-            id: this.state.id,
-            method: this.state.method,
-            trackinginfo: this.state.trackinginfo,
-            recived: this.state.trackinginfo,
-          }).then((result) => {
-            Config.setToast(" Order updated Successfully");
-            this.props.history.push("/admin/delivery");
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-          Config.setErrorToast("Somthing Went Wrong!");
-        });
+        u_id: this.state.id,
+        method: this.state.method,
+        trackinginfo: this.state.trackinginfo,
+        recieved: this.state.recived,
+        products: this.state.products,
+      });
+      console.log(res);
+      if (res.code == 200) {
+        Config.setToast(" Order updated Successfully");
+        this.props.history.push("/admin/delivery");
+      } else {
+        Config.setErrorToast("Somthing Went Wrong!");
+      }
+
+      // .then((result) => {
+      //   console.log("Delivery Details", result);
+      //   Config.setToast(" Order updated Successfully");
+      //   this.props.history.push("/admin/delivery");
+      // })
+
+      // .then((result) => {
+      //   console.log(result);
+      //   addDelivery({
+      //     id: this.state.id,
+      //     method: this.state.method,
+      //     trackinginfo: this.state.trackinginfo,
+      //     recived: this.state.trackinginfo,
+      //   }).then((result) => {
+
+      // })
+      // .catch((err) => {
+      //   console.log(err);
+      //   Config.setErrorToast("Somthing Went Wrong!");
+      // });
     }
   };
 

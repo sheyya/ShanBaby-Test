@@ -500,7 +500,7 @@ onChangeDeletPassword(e){
         {/*======================================*/}
         <div className="IS_UI_section">
           <h1 style={{ color: "#FF5555" }}>Delete Account</h1>
-          <p>Delete your Fashion Store Account permanently.</p>
+          <p>Delete your Account permanently.</p>
           <button
             onClick={() => this.showDeleteModal()}
             className="bnt_User_infor_delte"

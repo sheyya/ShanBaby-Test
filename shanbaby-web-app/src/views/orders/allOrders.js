@@ -92,33 +92,6 @@ class allOrders extends Component {
                     </div>
                   </div>
                 </div>
-                {/*Shipped orders start*/}
-                {/* <div className="col-12 px-0">
-                  <div className="card border-0 shadow-sm rounded mt-3 bg-white pb-2">
-                    <h5 className="text-dark bold-normal py-2 bg-white px-2">
-                      Shipped Orders
-                    </h5>
-                    <div className="table-responsive px-2">
-                      <table className="table table-stripped">
-                        <thead>
-                          <tr>
-                            <th scope="col">Date</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">User Name</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">Actions</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {ShippedOrders.map((item) =>
-                            this.renderOrdersTable(item)
-                          )}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div> */}
-                {/*Shipped orders end*/}
               </div>
             </div>
           </div>

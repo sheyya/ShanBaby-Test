@@ -16,47 +16,6 @@ const attributes = require("../../nodemon.json");
 //================================== Register Super Admin  =============================================
 //======================================================================================================
 
-// exports.registerSuperAdmin = function (req, res, next) {
-//   console.log("Pako wada karanawada");
-
-//   console.log(req.body);
-
-//   let new_admin = new Admin({
-//     fname: req.body.firstname,
-//     lname: req.body.lastname,
-//     email: req.body.useremail,
-//     password: req.body.password,
-//   });
-//   // check all values
-//   if (
-//     (new_admin.fname != null || new_admin.fname != undefined) &&
-//     (new_admin.lname != null || new_admin.lname != undefined) &&
-//     (new_admin.password != null || new_admin.password != undefined) &&
-//     (new_admin.email != null || new_admin.email != undefined)
-//   ) {
-//     console.log(new_admin);
-//     // check userdata
-//     Admin.find({ email: new_admin.email }, function (err, docs) {
-//       if (docs.length == 0) {
-//         //save
-//         new_admin.save(function (erro) {
-//           if (err) {
-//             return next(err);
-//           }
-//           res.status(200).send(new_admin);
-//           console.log("New user register");
-//         });
-//       } else {
-//         res.status(403).send("Already have");
-//       }
-//     });
-//   } else {
-//     res.status(600).send("Not Added");
-//   }
-// };
-
-// -------------------------------------------------------------------------------------------------------
-
 exports.registerSuperAdmin = async (req, res, next) => {
   if (
     req.body.firstname == undefined ||

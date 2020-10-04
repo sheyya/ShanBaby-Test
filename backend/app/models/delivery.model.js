@@ -13,7 +13,7 @@ let Delivery = new Schema({
     // required: true,
   },
   orderID: {
-    type: String,
+    type: Schema.Types.ObjectId,
     // required: true,
   },
   deliveryAddress: {
@@ -33,14 +33,10 @@ let Delivery = new Schema({
   },
   shipped: {
     type: Boolean,
-    default: false,
-    required: true,
   },
   recieved: {
     type: Boolean,
-    default: false,
-    required: true,
   },
 });
 
-module.exports = mongoose.model("delivery", Delivery);
+module.exports = mongoose.model("deliveries", Delivery);
