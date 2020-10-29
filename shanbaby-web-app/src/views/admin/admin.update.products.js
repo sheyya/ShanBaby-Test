@@ -601,11 +601,11 @@ class UpdateProducts extends Component {
 }
 
 const Sizes = [
-  { value: "XS", label: "XS" },
-  { value: "S", label: "S" },
-  { value: "M", label: "M" },
-  { value: "L", label: "L" },
-  { value: "XL", label: "XL" },
+  { value: "0-12M", label: "0-12M" },
+  { value: "0-24M", label: "0-24M" },
+  { value: "2T", label: "2T" },
+  { value: "3T", label: "3T" },
+  { value: "4T", label: "4T" },
 ];
 const mapStateToProps = (state) => ({
   auth: state.auth || {},

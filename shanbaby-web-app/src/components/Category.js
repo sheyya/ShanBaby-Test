@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import ProductItem from "./ProductItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCheckSquare,
-  faSquare,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCheckSquare, faSquare } from "@fortawesome/free-solid-svg-icons";
 
 class Category extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -20,25 +16,23 @@ class Category extends Component {
   }
 
   async componentWillMount() {
-    await this.FilterItems()
-    await this.renderBrand()
-    await this.renderTags()
-    await this.renderSizes()
+    await this.FilterItems();
+    await this.renderBrand();
+    await this.renderTags();
+    await this.renderSizes();
   }
 
   toggleFilterMenu = () =>
     this.setState({ filter_menu_expand: !this.state.filter_menu_expand });
 
   render() {
-    const loading = this.props.loading
+    const loading = this.props.loading;
     return (
       <section className="product-shop spad">
         <div className="container">
           <div className="row">
             <div className="col-lg-3 col-12 order-2 order-lg-1 produts-sidebar-filter">
-              <div className="row d-none d-lg-block">
-                {this.FilterItems()}
-              </div>
+              <div className="row d-none d-lg-block">{this.FilterItems()}</div>
             </div>
             <div className="col-lg-9 col-md-12 order-1 order-lg-2">
               <div className="product-show-option">
@@ -51,9 +45,9 @@ class Category extends Component {
                             <h5 className="text-dark font-weight-bold mt-2 mr-2">
                               {this.props.type}
                               <span className="small text-muted mx-2">
-                                {("0" + this.props.products.length).slice(-2)} results
-                                  found.
-                                </span>
+                                {("0" + this.props.products.length).slice(-2)}{" "}
+                                results found.
+                              </span>
                             </h5>
                           </li>
                         )}
@@ -65,7 +59,7 @@ class Category extends Component {
                             className=""
                           >
                             Filter
-                            </span>
+                          </span>
                           {this.FilterModel()}
                         </li>
                       </ul>
@@ -78,7 +72,9 @@ class Category extends Component {
                   {this.filter(this.props.products).map((item, key) => (
                     <ProductItem key={key} {...item}></ProductItem>
                   ))}
-                  {!loading && this.props.products.length == 0 && <this.NoItemFound />}
+                  {!loading && this.props.products.length == 0 && (
+                    <this.NoItemFound />
+                  )}
                 </div>
               </div>
             </div>
@@ -108,7 +104,7 @@ class Category extends Component {
     <div
       className={`dropdown-menu border-0 p-0 mt-2 shadow-sm  ${
         this.state.filter_menu_expand && "show"
-        }`}
+      }`}
     >
       <div className="container px-0 filter-widget-border">
         <div className="row bg-white rounded-0 m-0 w-100 p-2 ">
@@ -198,7 +194,7 @@ class Category extends Component {
       <h4 className="fw-title">Size</h4>
       <div className="fw-tags">
         <div className="fw-size-choose">
-          {["XS", "S", "M", "L", "XL"].map((item, i) => (
+          {["0-12M", "12-24M", "2T", "3T", "4T"].map((item, i) => (
             <div
               key={i}
               onClick={() =>

@@ -109,7 +109,7 @@ class Home extends React.Component {
                           <h4 className="font-weight-bold pb-1">
                             {category.banner_title}
                           </h4>
-                          <h5>{category.banne_subtitle}</h5>
+
                           <Link to={`/categories/${category.name}`}>
                             <label className="primary-btn bg-dark mt-2 click">
                               Shop Now

@@ -122,17 +122,6 @@ class SingleProduct extends Component {
       return false;
     });
   };
-  checkInWishlist = () => {
-    const { product } = this.state;
-    const wishlist = this.props.wishlist.wishlist;
-    return wishlist.findIndex((item) => {
-      if (item.product._id == product._id) {
-        return true;
-      } else {
-        return false;
-      }
-    });
-  };
 
   validate = () => {
     const { product, selected_color, selected_size, quantity } = this.state;
@@ -406,7 +395,6 @@ class SingleProduct extends Component {
 const mapStateToProps = (state) => ({
   cart: state.cart || {},
   auth: state.auth || {},
-  wishlist: state.wishlist || {},
 });
 
 const mapDispatchToProps = {

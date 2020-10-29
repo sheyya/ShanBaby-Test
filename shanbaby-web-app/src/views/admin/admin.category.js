@@ -35,7 +35,6 @@ class AdminCategory extends Component {
     super(props);
     this.state = {
       name: "",
-      banne_subtitle: "",
       uploaded_image: "",
       banner_title: "",
       selected_item: {},
@@ -59,7 +58,6 @@ class AdminCategory extends Component {
     e.preventDefault();
     let {
       name,
-      banne_subtitle,
       banner_title,
       files,
       selected_item,
@@ -82,7 +80,7 @@ class AdminCategory extends Component {
           {
             _id: selected_item._id,
             name: name,
-            banne_subtitle: banne_subtitle,
+
             banner_title: banner_title,
             token: user.token,
             type: user.type,
@@ -102,7 +100,7 @@ class AdminCategory extends Component {
         const user = this.props.auth.user;
         insertCategory(files[0], {
           name: name,
-          banne_subtitle: banne_subtitle,
+
           banner_title: banner_title,
           token: user.token,
           type: user.type,
@@ -136,7 +134,7 @@ class AdminCategory extends Component {
       categories,
       name,
       banner_title,
-      banne_subtitle,
+
       files,
       errors,
       update_mode,
@@ -196,23 +194,6 @@ class AdminCategory extends Component {
                           errors.banner_title.length > 0 && (
                             <h4 className="small text-danger mt-2 font-weight-bold mb-0">
                               {errors.banner_title}
-                            </h4>
-                          )}
-                        <h6 className="form-label py-2 mt-2">
-                          Banner Sub-title
-                        </h6>
-                        <input
-                          type="text"
-                          name="banne_subtitle"
-                          value={banne_subtitle}
-                          onChange={(e) => this.formValueChange(e)}
-                          placeholder="Enter Sub-title"
-                          className="form-control"
-                        ></input>
-                        {errors.banne_subtitle &&
-                          errors.banne_subtitle.length > 0 && (
-                            <h4 className="small text-danger mt-2 font-weight-bold mb-0">
-                              {errors.banne_subtitle}
                             </h4>
                           )}
                       </div>
@@ -342,7 +323,6 @@ class AdminCategory extends Component {
         </td>
         <td>
           <h6 className="form-label">{item.banner_title}</h6>
-          <span className="small">{item.banne_subtitle}</span>
         </td>
         <td>{moment(new Date(item.created_at)).format("YYYY MMM DD")}</td>
         <td>
@@ -370,7 +350,7 @@ class AdminCategory extends Component {
     this.setState({
       selected_item: item,
       name: item.name,
-      banne_subtitle: item.banne_subtitle,
+
       banner_title: item.banner_title,
       files: [],
       uploaded_image: Config.setImage(item.banner_image),
@@ -402,7 +382,7 @@ class AdminCategory extends Component {
   };
 
   validate = () => {
-    let { errors, name, banne_subtitle, banner_title } = this.state;
+    let { errors, name, banner_title } = this.state;
     let count = 0;
 
     if (name.length == 0) {
@@ -410,13 +390,6 @@ class AdminCategory extends Component {
       count++;
     } else {
       errors.name = "";
-    }
-
-    if (banne_subtitle.length == 0) {
-      errors.banne_subtitle = "Banner subtitle can not be empty";
-      count++;
-    } else {
-      errors.banne_subtitle = "";
     }
 
     if (banner_title.length == 0) {
@@ -453,7 +426,7 @@ class AdminCategory extends Component {
     this.setState({
       name: "",
       update_mode: false,
-      banne_subtitle: "",
+
       uploaded_image: "",
       banner_title: "",
       files: [],

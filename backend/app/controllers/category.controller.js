@@ -4,7 +4,6 @@ exports.insert = (req, res, next) => {
   let new_category = Category({
     name: req.body.name,
     banner_title: req.body.banner_title,
-    banne_subtitle: req.body.banne_subtitle,
     banner_image: req.file.path,
     created_at: new Date(),
     updated_at: new Date(),
@@ -62,11 +61,6 @@ exports.update = (req, res, next) => {
       //if title changed
       if (req.body.banner_title) {
         found_category.banner_title = req.body.banner_title;
-      }
-
-      //if subtitle changed
-      if (req.body.banne_subtitle) {
-        found_category.banne_subtitle = req.body.banne_subtitle;
       }
 
       //if image changed

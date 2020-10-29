@@ -132,11 +132,11 @@ class AdminProduct extends Component {
         <td>
           <img
             src={Config.setImage(item.images[0])}
-            height={60}
+            width={50}
             className="mr-2"
           />
           {item.images.length > 1 && (
-            <img src={Config.setImage(item.images[1])} height={60} />
+            <img src={Config.setImage(item.images[1])} width={40} />
           )}
         </td>
         <td>

@@ -47,6 +47,6 @@ router.patch(
 );
 
 //delete category by id
-router.delete("/delete/:id", checkAuth, checkRole(["admin"]), cateogry.delete);
+router.delete("/delete/:id", cateogry.delete); //not check authentication
 
 module.exports = router;

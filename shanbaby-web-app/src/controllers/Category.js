@@ -22,7 +22,7 @@ export const insertCategory = (files, data) => {
   let formdata = new FormData();
   formdata.set("name", data.name);
   formdata.set("banner_title", data.banner_title);
-  formdata.set("banne_subtitle", data.banne_subtitle);
+
   formdata.set("token", data.token);
   formdata.set("type", data.type);
   formdata.append("photos", files);
@@ -43,7 +43,7 @@ export const updateCategory = (files, data, newImage) => {
   let formdata = new FormData();
   formdata.set("name", data.name);
   formdata.set("banner_title", data.banner_title);
-  formdata.set("banne_subtitle", data.banne_subtitle);
+
   formdata.set("token", data.token);
   formdata.set("type", data.type);
   if (newImage) {

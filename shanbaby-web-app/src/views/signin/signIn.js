@@ -50,57 +50,7 @@ class SignIn extends Component {
   // =============== Functions        Start   ===============
   // ========================================================
 
-  checkDevice = () => {
-    if (isMobileOnly) {
-      this.setState({
-        deviceUser: "Mobile",
-      });
-      // return true
-    }
-    if (isTablet) {
-      this.setState({
-        deviceUser: "Tablet",
-      });
-      // return true
-    }
-    if (isSmartTV) {
-      this.setState({
-        deviceUser: "Smart TV",
-      });
-      // return true
-    }
-    if (isBrowser) {
-      this.setState({
-        deviceUser: "Computer",
-      });
-      // return true
-    }
-  };
-  checkuserMobile = () => {
-    if (isWinPhone) {
-      this.setState({
-        userMobile: "Windows",
-      });
-      // return true
-    }
-    if (isIOS) {
-      this.setState({
-        userMobile: "IOS",
-      });
-      // return true
-    }
-    if (isAndroid) {
-      this.setState({
-        userMobile: "Android",
-      });
-      // return true
-    }
-  };
-
   async componentWillMount() {
-    await this.checkDevice();
-    await this.checkuserMobile();
-
     await console.log(this.state.deviceUser);
     await console.log(this.state.userMobile);
   }
