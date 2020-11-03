@@ -523,11 +523,11 @@ class AddProducts extends Component {
 }
 
 const Sizes = [
-  { value: "0-12M", label: "0-12M" },
-  { value: "0-24M", label: "0-24M" },
-  { value: "2T", label: "2T" },
-  { value: "3T", label: "3T" },
-  { value: "4T", label: "4T" },
+  { value: "0-6M", label: "0-6M" },
+  { value: "6-12M", label: "6-12M" },
+  { value: "12-18M", label: "12-18M" },
+  { value: "2-3T", label: "2-3T" },
+  { value: "4-5T", label: "4-5T" },
 ];
 const mapStateToProps = (state) => ({
   auth: state.auth || {},

@@ -194,7 +194,7 @@ class Category extends Component {
       <h4 className="fw-title">Size</h4>
       <div className="fw-tags">
         <div className="fw-size-choose">
-          {["0-12M", "12-24M", "2T", "3T", "4T"].map((item, i) => (
+          {["0-6M", "6-12M", "12-18M", "2-3T", "4-5T"].map((item, i) => (
             <div
               key={i}
               onClick={() =>
