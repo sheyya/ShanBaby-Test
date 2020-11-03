@@ -72,7 +72,7 @@ class Home extends React.Component {
             <section className=" pb-3">
               <div className="container-fluid px-lg-5">
                 <div className="row justify-content-center">
-                  {product.slice(0, 5).map((products) => (
+                  {product.slice(0, 6).map((products) => (
                     <ProductItem {...products}></ProductItem>
                   ))}
                 </div>
