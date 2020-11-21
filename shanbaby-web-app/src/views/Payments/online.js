@@ -1,44 +1,39 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 import MainNavbar from "../../components/MainNavbar";
 import Footer from "../../components/Footer";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
-import OnImg from '../../asserts/Images/online.png'
+import OnImg from "../../asserts/Images/online.png";
+import Config from "../../controllers/Config";
+
 class Online extends Component {
-    constructor() {
-        super();
-        this.state = {
+  constructor(props) {
+    super(props);
+    this.state = {};
 
-        };
+    console.log(this.props);
+  }
 
+  render() {
+    console.log("testttttttt", this.props.location.total);
 
-
-    }
-
-
-
-    render() {
-        return (
-            <div className="wrapper">
-                <MainNavbar ></MainNavbar>
-                <div className="container-fluid px-5">
-                    <div className="row">
-                        <div className="col-md-12">
-                            <center><img src={OnImg} className="img-fluid" />
-                            <h3 className="p-3 m-2">Your Payment is Successfull</h3>
-                            <Link to="/">
-                          <label className="primary-btn  mt-2 click mb-4 p-3">Back to Home</label>
-                         </Link>
-                         </center>
-                        </div>
-                    </div>
-                </div>
-                <Footer></Footer>
+    return (
+      <div className="wrapper">
+        <MainNavbar></MainNavbar>
+        <div className="container-fluid px-5">
+          <div className="row">
+            <div className="col-md-12">
+              <center>
+                <img src={OnImg} className="w-50 p-3" />
+              </center>
             </div>
-        );
-    }
+          </div>
+        </div>
+        <Footer className="mt-10"></Footer>
+      </div>
+    );
+  }
 }
-
 
 export default Online;

@@ -52,6 +52,23 @@ export const getAllProductByCategory = (cateogry_name) => {
   });
 };
 
+export const getAllProductByTag = (tag_name) => {
+  return new Promise((resolve, reject) => {
+    return axios
+      .get(`${Config.host}${Config.port}/product/gettag/${tag_name}`)
+      .then((result) => {
+        if (result.data.code == 200) {
+          resolve(result.data.data);
+        } else {
+          resolve([]);
+        }
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
 export const getProductBySearch = (search) => {
   return new Promise((resolve, reject) => {
     return axios

@@ -304,7 +304,7 @@ class SingleProduct extends Component {
                     </li>
                     <li>
                       <a data-toggle="tab" href="#tab-2" role="tab">
-                        Introduction
+                        Size Chart
                       </a>
                     </li>
                   </ul>
@@ -326,25 +326,11 @@ class SingleProduct extends Component {
                     </div>
                     <div className="tab-pane fade" id="tab-2" role="tabpanel">
                       <div className="row">
-                        <div className="pt-3 col-12">
-                          <h5 className="font-weight-bold py-2">
-                            Introduction
-                          </h5>
-                          <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco laboris nisi ut aliquip
-                            ex ea commodo consequat. Duis aute irure dolor in{" "}
-                          </p>
-                          <h5 className="font-weight-bold py-2">Features</h5>
-                          <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco laboris nisi ut aliquip
-                            ex ea commodo consequat. Duis aute irure dolor in{" "}
-                          </p>
+                        <div className="p-3 col-12">
+                          <img
+                            className="w-100 p-3"
+                            src="../../../images/default/SIZECHART.jpg"
+                          ></img>
                         </div>
                       </div>
                     </div>

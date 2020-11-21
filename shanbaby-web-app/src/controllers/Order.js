@@ -17,6 +17,24 @@ export const insertOrder = (data, token) => {
   });
 };
 
+export const insertPayment = (data, token) => {
+  console.log("paytestinggggggggg", data);
+
+  return new Promise((resolve, reject) => {
+    return axios
+      .post(`${Config.host}${Config.port}/order/InsertPayment`, {
+        ...data,
+        token: token,
+      })
+      .then((result) => {
+        resolve({ code: 200, message: result.data.message });
+      })
+      .catch((err) => {
+        reject({ code: 0, error: err });
+      });
+  });
+};
+
 export const getAllOrders = () => {
   return new Promise((resolve, reject) => {
     return axios
@@ -38,7 +56,10 @@ export const updateOrder = (data) => {
   console.log(data);
   return new Promise((resolve, reject) => {
     return axios
-      .patch(`${Config.host}${Config.port}/order/update/${data.id}`, data)
+      .patch(
+        `${Config.host}${Config.port}/order/updateDelivery/${data.id}`,
+        data
+      )
       .then((result) => {
         console.log(result.data);
         resolve({ code: 200, message: result.data.message });

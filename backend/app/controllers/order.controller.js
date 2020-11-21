@@ -1,5 +1,6 @@
 const Order = require("../models/order.model");
 const Delivery = require("../models/delivery.model");
+const Payment = require("../models/payment.model");
 exports.Insert = (req, res, next) => {
   console.log(req.body);
 
@@ -24,6 +25,38 @@ exports.Insert = (req, res, next) => {
       code: 200,
       data: result,
       message: "Order Added Successfully",
+    };
+
+    res.json(data);
+  });
+};
+
+exports.InsertPayment = (req, res, next) => {
+  console.log(req.body);
+  let newPayment = {};
+
+  newPayment = {
+    user: {
+      amount: req.body.amount,
+      userId: req.body.userId,
+      userName: req.body.userName,
+    },
+    data: req.body.paymentData,
+    products: req.body.products,
+  };
+
+  console.log("New Payment: ", newPayment);
+
+  newPayment.save((err, result) => {
+    if (err) {
+      return next(err);
+    }
+
+    data = {
+      status: "success",
+      code: 200,
+      data: result,
+      message: "Payments Added Successfully",
     };
 
     res.json(data);
@@ -146,24 +179,31 @@ exports.update = async (req, res, next) => {
     );
     console.log("UPdatred ======================================");
 
-    let deliver = Delivery({
-      deliveryMethod: req.body.method,
-      TrackingInfo: req.body.trackinginfo,
-      recieved: req.body.recieved,
-      orderID: req.body.u_id,
-      userName: req.body.userName,
-      products: req.body.products,
-      shipped: req.body.shipped,
-    });
-
-    const save_res = await deliver.save();
-
-    console.log(save_res);
+    console.log(update);
 
     return res.status(200).send({
       msg: "Success",
     });
   }
+};
+
+exports.updateDelivery = async (req, res, next) => {
+  let deliver = Delivery({
+    deliveryMethod: req.body.method,
+    TrackingInfo: req.body.trackinginfo,
+    recieved: req.body.recieved,
+    orderID: req.body.u_id,
+    userName: req.body.userName,
+    products: req.body.products,
+    shipped: req.body.shipped,
+  });
+
+  const save_res = await deliver.save();
+
+  console.log(save_res);
+  return res.status(200).send({
+    msg: "Success",
+  });
 };
 
 exports.RequestDelete = (req, res, next) => {

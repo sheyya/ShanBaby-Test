@@ -53,6 +53,9 @@ router.get("/getall/simple", product.getAllLessDetails);
 //get products by category name
 router.get("/get/:categoryname", product.getByCategoryName);
 
+//get products by category name
+router.get("/gettag/:tagname", product.getByTags);
+
 //get products by id
 router.get("/getsingle/:id", product.getProductById);
 

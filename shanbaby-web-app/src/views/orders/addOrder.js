@@ -5,9 +5,11 @@ import Footer from "../../components/Footer";
 import Config from "../../controllers/Config";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { insertOrder } from "../../controllers/Order";
+import { insertOrder, insertPayment } from "../../controllers/Order";
 import { string, bool } from "prop-types";
 import { cleartCart } from "../../actions/cartActions";
+import Online from "../Payments/online";
+import Paypal from "../Payments/paypal";
 class Order extends Component {
   constructor(props) {
     super(props);
@@ -22,22 +24,24 @@ class Order extends Component {
       postalCode: "",
       deliveryAddress: "",
       userId: "5eaee2f5c8aa252450f5e8c4",
-      payment: "",
+      payment: null,
     };
   }
 
   componentDidMount() {
-    console.log();
+    //console.log();
   }
 
   formValueChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  onFormSubmitTest = (e) => this.onFormSubmit(e);
+
   //on form submit
   onFormSubmit = (e) => {
     e.preventDefault();
-    console.log("Submited Products: ", this.props.cart.cart);
+    //console.log("Submited Products: ", this.props.cart.cart);
     const filtered_products = this.props.cart.cart.map((item) => {
       return {
         id: item.product.name,
@@ -48,11 +52,13 @@ class Order extends Component {
       };
     });
 
-    console.log("Product Array: ", filtered_products);
+    // console.log("Product Array: ", filtered_products);
 
-    console.log("User Details: ", this.props.auth.user);
+    //console.log("User Details: ", this.props.auth.user);
 
     if (this.validate()) {
+      console.log("---------------------VALIDATeD_----------");
+
       insertOrder(
         {
           amount: Config.calcualte_total(this.props.cart.cart),
@@ -75,16 +81,20 @@ class Order extends Component {
                 console.log(err);
               });
           Config.setToast(" Order Placed Successfully");
-          console.log("payment value: ", this.state.payment);
+          //console.log("payment value: ", this.state.payment);
 
-          if (this.state.payment == "true") {
-            this.props.history.push("/cod");
-          } else if (this.state.payment == "false") {
-            this.props.history.push("/online");
-          }
+          this.props.history.push("/cod");
+
+          // else if (this.state.payment == "false") {
+          //   this.props.history.push({
+          //     pathname: "/online",
+          //     total: totamount,
+          //   });
+          // }
+          //console.log("TESTINGGGGG", totamount);
         })
         .catch((err) => {
-          console.log(err);
+          //console.log(err);
           Config.setErrorToast("Somthing Went Wrong!");
         });
     }
@@ -101,9 +111,81 @@ class Order extends Component {
       postalCode,
       payment,
     } = this.state;
+
+    let totamount = (
+      Config.calcualte_total(this.props.cart.cart) * 0.005405
+    ).toFixed(2);
+
+    const transactionSuccess = (e, data) => {
+      const filtered_products = this.props.cart.cart.map((item) => {
+        return {
+          id: item.product.name,
+          quantity: item.quantity,
+          price: item.product.price,
+          selected_size: item.selected_size,
+          selected_color: item.selected_color ? item.selected_color : "",
+        };
+      });
+      if (this.validate()) {
+        console.log("---------------------VALIDATeD_----------");
+
+        insertOrder(
+          {
+            amount: Config.calcualte_total(this.props.cart.cart),
+            userId: this.props.auth.user.id,
+            userName: this.state.username,
+            deliveryAddress: `${this.state.addressLine1}, ${this.state.addressLine2}, ${this.state.province}, ${this.state.postalCode}`,
+            products: filtered_products,
+          },
+          this.props.auth.user.token
+        )
+          .then((result) => {
+            this.clearAll();
+            this.props.cleartCart &&
+              this.props
+                .cleartCart(this.props.auth.user.id, this.props.auth.user.token)
+                .then((result) => {
+                  console.log("cleared");
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            Config.setToast(" Order Placed Successfully");
+          })
+          .catch((err) => {
+            //console.log(err);
+            Config.setErrorToast("Somthing Went Wrong!");
+          });
+      }
+
+      console.log("--------------------------------");
+      console.log(data);
+
+      console.log("--------------------------------");
+      insertPayment({
+        amount: Config.calcualte_total(this.props.cart.cart),
+        userId: this.props.auth.user.id,
+        userName: this.state.username,
+        paymentData: data,
+        products: filtered_products,
+      });
+      this.props.history.push("/cod");
+    };
+
+    const transactionError = () => {
+      console.log("Transaction Error");
+      Config.setErrorToast("ERROR In Transaction");
+    };
+
+    const transactionCancel = () => {
+      console.log("Transaction Cancel");
+      Config.setErrorToast("Transaction Cancelled!");
+    };
+
     return (
       <div className="wrapper">
         <MainNavbar></MainNavbar>
+
         <section className="product-shop spad">
           <div className="container">
             <div className="row">
@@ -209,35 +291,22 @@ class Order extends Component {
                       )}
                     </div>
 
-                    <div className="col-md-4">
-                      <h6 className="form-label py-2">Payment Method</h6>
-                      <select
-                        className="form-control"
-                        value={payment}
-                        name="payment"
-                        onChange={(e) => this.formValueChange(e)}
-                      >
-                        <option value="" selected="selected">
-                          Select Payment
-                        </option>
-                        <option value="true">Cash On Delivery</option>
-                        <option value="false">Online Payment</option>
-                      </select>
-                      {errors.payment && errors.payment.length > 0 && (
-                        <h4 className="small text-danger mt-2 font-weight-bold mb-0">
-                          {errors.payment}
-                        </h4>
-                      )}
-                    </div>
-
-                    <div className="col-md-12 mt-2">
-                      <div className="d-flex">
+                    <div className="col-md-12 mt-5 ">
+                      <div className="d-flex justify-content-center">
                         <button
-                          className="px-4 btn btn-dark mt-2 btn-sm bold-normal"
+                          className="px-5 btn btn-dark  btn-sm bold-normal"
                           type="submit"
                         >
-                          Submit Order
+                          Pay On Delivery
                         </button>
+                        <div className="d-flex mx-5 justify-content-center">
+                          <Paypal
+                            toPay={totamount}
+                            onSuccess={transactionSuccess}
+                            onError={transactionError}
+                            onCancel={transactionCancel}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -250,7 +319,7 @@ class Order extends Component {
                     this.renderOrderDetails(item)
                   )}
                 </div>
-                <div className="proceed-checkout mt-3">
+                <div className="  ">
                   <ul>
                     <li className="subtotal">
                       Sub-Total{" "}
@@ -282,7 +351,7 @@ class Order extends Component {
   }
 
   validate = () => {
-    console.log("validate work");
+    //console.log("validate work");
 
     let {
       errors,
@@ -324,13 +393,6 @@ class Order extends Component {
       errors.postalCode = "";
     }
 
-    if (payment.length == 0) {
-      errors.payment = "Please Select A Payment Method";
-      count++;
-    } else {
-      errors.payment = "";
-    }
-
     this.setState({ errors });
     return count == 0;
   };
@@ -349,7 +411,7 @@ class Order extends Component {
   };
 
   renderOrderDetails = (item) => {
-    console.log("Order item: ", item);
+    //console.log("Order item: ", item);
     return (
       <div className="card mb-3">
         <div className="card-body">

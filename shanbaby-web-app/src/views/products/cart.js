@@ -135,7 +135,9 @@ class Cart extends Component {
                             <th scope="col">Image</th>
                             <th scope="col">Product</th>
                             <th scope="col">Price</th>
-                            <th scope="col">Quantity</th>
+                            <th scope="col" className="px-5 text-left">
+                              Quantity
+                            </th>
                             <th scope="col">Total</th>
                             <th scope="col">Actions</th>
                           </tr>
@@ -208,7 +210,7 @@ class Cart extends Component {
         <td>
           <img
             src={Config.setImage(product.images[0])}
-            height={60}
+            width={100}
             className="mr-2 my-2"
           />
         </td>

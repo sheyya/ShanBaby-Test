@@ -233,14 +233,23 @@ class MainNavbar extends React.Component {
                       ))}
                   </ul>
                 </li>
-                {/* <li
+                <li
                   className={
-                    this.props.active && this.props.active == "offers"
+                    this.props.active && this.props.active == "girls"
                       ? "active"
                       : ""
                   }
                 >
-                  <Link to="/offers">Offers</Link>
+                  <Link to="/girls">Girls</Link>
+                </li>
+                <li
+                  className={
+                    this.props.active && this.props.active == "boys"
+                      ? "active"
+                      : ""
+                  }
+                >
+                  <Link to="/boys">Boys</Link>
                 </li>
                 <li
                   className={
@@ -259,7 +268,7 @@ class MainNavbar extends React.Component {
                   }
                 >
                   <Link to="/contactus">Contact Us</Link>
-                </li> */}
+                </li>
               </ul>
             </nav>
             <div id="mobile-menu-wrap"></div>

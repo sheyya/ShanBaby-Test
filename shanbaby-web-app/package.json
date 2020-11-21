@@ -33,6 +33,7 @@
     "react-filepond": "^7.1.0",
     "react-html-parser": "^2.0.2",
     "react-password-strength": "^2.4.0",
+    "react-paypal-express-checkout": "^1.0.5",
     "react-redux": "^7.2.1",
     "react-responsive-carousel": "^3.2.10",
     "react-router-dom": "^5.2.0",

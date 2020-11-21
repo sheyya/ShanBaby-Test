@@ -24,7 +24,7 @@ export class MoreDetails extends Component {
       date: Date,
       products: [],
       deleteRequest: bool,
-      shipped: bool,
+      shipped: false,
       addressLine1: "",
       addressLine2: "",
       postalCode: "",

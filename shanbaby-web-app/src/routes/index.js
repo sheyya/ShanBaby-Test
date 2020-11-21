@@ -16,6 +16,14 @@ import AdminLogin from "../views/admin/adminlogin";
 //single product page
 import SingleProduct from "../views/products/singleProduct";
 
+import AboutUs from "../views/staticpages/aboutus";
+
+import ContactUs from "../views/staticpages/contactus";
+
+import Boys from "../views/genderfilter/Boys";
+
+import Girls from "../views/genderfilter/Girls";
+
 let indexRoutes = [
   {
     path: "/",
@@ -44,18 +52,30 @@ let indexRoutes = [
     component: AdminLogin,
     exact: true,
   },
-  // {
-  //   path: "/contactus",
-  //   name: "Contact_Us",
-  //   component: ContactUs,
-  //   exact: true,
-  // },
-  // {
-  //   path: "/aboutus",
-  //   name: "AboutUs",
-  //   component: AboutUs,
-  //   exact: true,
-  // },
+  {
+    path: "/contactus",
+    name: "Contact_Us",
+    component: ContactUs,
+    exact: true,
+  },
+  {
+    path: "/aboutus",
+    name: "AboutUs",
+    component: AboutUs,
+    exact: true,
+  },
+  {
+    path: "/girls",
+    name: "Girls",
+    component: Girls,
+    exact: true,
+  },
+  {
+    path: "/boys",
+    name: "Boys",
+    component: Boys,
+    exact: true,
+  },
   // {
   //   path: "/pp",
   //   name: "PP",

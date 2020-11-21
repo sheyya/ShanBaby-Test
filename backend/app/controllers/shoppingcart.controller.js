@@ -141,6 +141,7 @@ exports.clear = (req, res, next) => {
     if (err) {
       return next(err);
     }
+    console.log("CLear Cart Working");
 
     data = {
       status: "success",

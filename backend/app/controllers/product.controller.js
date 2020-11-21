@@ -182,6 +182,26 @@ exports.getByCategoryName = (req, res, next) => {
   });
 };
 
+exports.getByTags = (req, res, next) => {
+  let query = { "tags.value": req.params.tagname };
+
+  Product.find(query, (err, result) => {
+    if (err) {
+      return next(err);
+    }
+
+    data = {
+      status: "success",
+      code: 200,
+      data: result,
+    };
+
+    console.log(data);
+
+    res.json(data);
+  });
+};
+
 exports.getProductById = (req, res, next) => {
   Product.findOne({ _id: req.params.id }, (err, result) => {
     if (err) {

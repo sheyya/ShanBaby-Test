@@ -18,6 +18,6 @@ router.patch("/update/:id", checkAuth, cart.update);
 router.delete("/delete/:id", checkAuth, cart.delete);
 
 //clear user cart
-router.delete("/clear/:userid", checkAuth, cart.clear);
+router.delete("/clear/:userid", cart.clear);
 
 module.exports = router;
