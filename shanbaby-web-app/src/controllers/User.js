@@ -285,7 +285,7 @@ class User {
 
   // get token
   getToken() {
-    if (Cookies.get("cTok") != null || Cookies.get("cTok") != undefined) {
+    if (Cookies.get("cTok") !== null || Cookies.get("cTok") !== undefined) {
       return Cookies.get("cTok");
     }
     return false;
@@ -300,7 +300,7 @@ class User {
   }
   // get email
   getEmail() {
-    if (Cookies.get("cM") != null || Cookies.get("cM") != undefined) {
+    if (Cookies.get("cM") !== null || Cookies.get("cM") !== undefined) {
       return atob(Cookies.get("cM"));
     }
     return false;
@@ -470,7 +470,7 @@ class User {
       token: token,
     };
 
-    var resp = 500;
+    resp = 500;
 
     await Axios.post(
       `${Config.host}${Config.port}${this.api.deleteUser}`,

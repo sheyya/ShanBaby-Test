@@ -6,7 +6,7 @@ export const getAllProducts = () => {
     return axios
       .get(`${Config.host}${Config.port}/product/getall`)
       .then((result) => {
-        if (result.data.code == 200) {
+        if (result.data.code === 200) {
           resolve(result.data.data);
         } else {
           resolve([]);
@@ -23,7 +23,7 @@ export const getAllProductsSimple = () => {
     return axios
       .get(`${Config.host}${Config.port}/product/getall/simple`)
       .then((result) => {
-        if (result.data.code == 200) {
+        if (result.data.code === 200) {
           resolve(result.data.data);
         } else {
           resolve([]);
@@ -40,7 +40,7 @@ export const getAllProductByCategory = (cateogry_name) => {
     return axios
       .get(`${Config.host}${Config.port}/product/get/${cateogry_name}`)
       .then((result) => {
-        if (result.data.code == 200) {
+        if (result.data.code === 200) {
           resolve(result.data.data);
         } else {
           resolve([]);
@@ -57,7 +57,7 @@ export const getAllProductByTag = (tag_name) => {
     return axios
       .get(`${Config.host}${Config.port}/product/gettag/${tag_name}`)
       .then((result) => {
-        if (result.data.code == 200) {
+        if (result.data.code === 200) {
           resolve(result.data.data);
         } else {
           resolve([]);
@@ -74,7 +74,7 @@ export const getProductBySearch = (search) => {
     return axios
       .get(`${Config.host}${Config.port}/product/search/${search}`)
       .then((result) => {
-        if (result.data.code == 200) {
+        if (result.data.code === 200) {
           resolve(result.data.data);
         } else {
           resolve([]);
@@ -91,7 +91,7 @@ export const getProductById = (id) => {
     return axios
       .get(`${Config.host}${Config.port}/product/getsingle/${id}`)
       .then((result) => {
-        if (result.data.code == 200) {
+        if (result.data.code === 200) {
           resolve(result.data.data);
         } else {
           reject({ error: "not found" });

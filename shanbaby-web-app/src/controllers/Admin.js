@@ -5,9 +5,6 @@ import Axios from "axios";
 // import config
 import Config from "./Config";
 
-// import hashmethod
-import Crypto from "crypto-js";
-
 // import cookies
 import Cookies from "js-cookie";
 

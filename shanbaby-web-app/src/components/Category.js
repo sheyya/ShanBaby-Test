@@ -72,7 +72,7 @@ class Category extends Component {
                   {this.filter(this.props.products).map((item, key) => (
                     <ProductItem key={key} {...item}></ProductItem>
                   ))}
-                  {!loading && this.props.products.length == 0 && (
+                  {!loading && this.props.products.length === 0 && (
                     <this.NoItemFound />
                   )}
                 </div>
@@ -89,6 +89,7 @@ class Category extends Component {
       <div className="card shadow-sm border py-4">
         <img
           src="images/default/no_result.png"
+          alt="Item Not Found"
           className="rounded mx-auto d-block"
           width={110}
         />
@@ -199,7 +200,7 @@ class Category extends Component {
               key={i}
               onClick={() =>
                 this.setState({
-                  selected_size: this.state.selected_size == item ? "" : item,
+                  selected_size: this.state.selected_size === item ? "" : item,
                 })
               }
               className="sc-item"
@@ -224,7 +225,7 @@ class Category extends Component {
     let { selected_brands } = this.state;
     if (selected_brands.includes(brand)) {
       this.setState({
-        selected_brands: selected_brands.filter((i) => i != brand),
+        selected_brands: selected_brands.filter((i) => i !== brand),
       });
     } else {
       this.setState({ selected_brands: [...selected_brands, brand] });
@@ -234,7 +235,7 @@ class Category extends Component {
   clickTag = (tag) => {
     let { selected_tags } = this.state;
     if (selected_tags.includes(tag)) {
-      this.setState({ selected_tags: selected_tags.filter((i) => i != tag) });
+      this.setState({ selected_tags: selected_tags.filter((i) => i !== tag) });
     } else {
       this.setState({ selected_tags: [...selected_tags, tag] });
     }
@@ -258,7 +259,7 @@ class Category extends Component {
 
     if (selected_size !== "") {
       filtered_products = filtered_products.filter((item) => {
-        return item.sizes.some((size) => size.value == selected_size);
+        return item.sizes.some((size) => size.value === selected_size);
       });
     }
 

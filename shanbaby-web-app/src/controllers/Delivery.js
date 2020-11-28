@@ -20,7 +20,7 @@ export const getAllOrdersWithDelivery = () => {
     return axios
       .get(`${Config.host}${Config.port}/delivery/GetAll/`)
       .then((result) => {
-        if (result.data.code == 200) {
+        if ((result.data.code = 200)) {
           resolve(result.data.data);
         } else {
           resolve([]);

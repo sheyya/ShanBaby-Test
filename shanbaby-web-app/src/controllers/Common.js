@@ -8,7 +8,7 @@ export const getCounts = (search) => {
       .then((result) => {
         console.log(result);
 
-        if (result.data.code == 200) {
+        if (result.data.code === 200) {
           resolve(result.data.data);
         } else {
           resolve([]);
@@ -25,7 +25,7 @@ export const getRevenue = (search) => {
     return axios
       .get(`${Config.host}${Config.port}/common/revenue`)
       .then((result) => {
-        if (result.data.code == 200) {
+        if (result.data.code === 200) {
           resolve(result.data.data);
         } else {
           resolve([]);

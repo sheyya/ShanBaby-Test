@@ -2,10 +2,8 @@ import React, { Component } from "react";
 
 import MainNavbar from "../../components/MainNavbar";
 import Footer from "../../components/Footer";
-import { Link } from "react-router-dom";
 
 import OnImg from "../../asserts/Images/online.png";
-import Config from "../../controllers/Config";
 
 class Online extends Component {
   constructor(props) {
@@ -25,7 +23,7 @@ class Online extends Component {
           <div className="row">
             <div className="col-md-12">
               <center>
-                <img src={OnImg} className="w-50 p-3" />
+                <img src={OnImg} alt="Order Success" className="w-50 p-3" />
               </center>
             </div>
           </div>

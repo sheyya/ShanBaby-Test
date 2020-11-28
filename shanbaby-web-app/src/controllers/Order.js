@@ -40,7 +40,7 @@ export const getAllOrders = () => {
     return axios
       .get(`${Config.host}${Config.port}/order/GetAll`)
       .then((result) => {
-        if (result.data.code == 200) {
+        if (result.data.code === 200) {
           resolve(result.data.data);
         } else {
           resolve([]);
@@ -77,7 +77,7 @@ export const getOrderById = (id) => {
     return axios
       .get(`${Config.host}${Config.port}/order/getOrder/${id}`)
       .then((result) => {
-        if (result.data.code == 200) {
+        if (result.data.code === 200) {
           resolve(result.data.data);
         } else {
           reject({ error: "not found" });
@@ -109,7 +109,7 @@ export const getOrdersByUserId = (id) => {
     return axios
       .get(`${Config.host}${Config.port}/order/get/${id}`)
       .then((result) => {
-        if (result.data.code == 200) {
+        if (result.data.code === 200) {
           resolve(result.data.data);
         } else {
           resolve([]);
@@ -126,7 +126,7 @@ export const getAllProducts = () => {
     return axios
       .get(`${Config.host}${Config.port}/product/getall`)
       .then((result) => {
-        if (result.data.code == 200) {
+        if (result.data.code === 200) {
           resolve(result.data.data);
         } else {
           resolve([]);

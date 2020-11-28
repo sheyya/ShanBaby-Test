@@ -1,7 +1,6 @@
-import { GET, GET_CART, GET_CATEGORIES } from "./types";
+import { GET_CART, GET_CATEGORIES } from "./types";
 import axios from "axios";
 import Config from "../controllers/Config";
-import User from "../controllers/User";
 
 export const addtocart = (data, userid, token) => {
   return (dispatch) =>

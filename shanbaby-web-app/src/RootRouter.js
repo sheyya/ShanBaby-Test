@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  useHistory,
-  withRouter,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import indexRoutes from "./routes/index";
 import adminRoutes from "./routes/adminroutes";
@@ -18,11 +12,11 @@ class App extends React.Component {
     let checkSignedIn = this.props.auth.isAuthenticated;
     let role = checkSignedIn ? this.props.auth.user.type : "";
 
-    if (checkSignedIn == true) {
+    if (checkSignedIn === true) {
       routes = [...loginUserRoutes, ...routes];
     }
 
-    if (checkSignedIn == true && role == "admin") {
+    if (checkSignedIn === true && role === "admin") {
       routes = [...adminRoutes, ...routes];
     }
 

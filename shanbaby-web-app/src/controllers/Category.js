@@ -6,7 +6,7 @@ export const getAllCategories = () => {
     return axios
       .get(`${Config.host}${Config.port}/category/getall`)
       .then((result) => {
-        if (result.data.code == 200) {
+        if (result.data.code === 200) {
           resolve(result.data.data);
         } else {
           resolve([]);
