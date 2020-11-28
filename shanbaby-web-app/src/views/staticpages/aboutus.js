@@ -5,9 +5,11 @@ import MainNavbar from "../../components/MainNavbar";
 // import footer
 import Footer from "../../components/Footer";
 import "./common.css";
-// import how from '../../Images/howrelax1.png'
 
-import newimg from "../../asserts/Images/newnew.png";
+import about1 from "../../asserts/Images/about1.jpg";
+import about2 from "../../asserts/Images/about2.jpg";
+import about3 from "../../asserts/Images/about3.jpg";
+
 import MainSlider from "../../components/MainSlider";
 
 class AboutUs extends Component {
@@ -62,25 +64,16 @@ class AboutUs extends Component {
                                     <img src="https://res.cloudinary.com/dxqwnvudu/image/upload/v1587120969/FashionStore/emailtemplateImages/mains/offer03_b4nq9n.png"  alt="" />
                                 </div> */}
                 <div className="col-4 mt-3 mb-3   ">
-                  <img
-                    src="https://res.cloudinary.com/dxqwnvudu/image/upload/v1587120874/FashionStore/emailtemplateImages/products/women-large_sszx5b.jpg"
-                    alt=""
-                  />
+                  <img src="https://i.imgur.com/DNZveX5.jpg" alt="" />
                 </div>
                 <div className="col-4 mt-3 mb-3   ">
-                  <img
-                    src="https://res.cloudinary.com/dxqwnvudu/image/upload/v1587120876/FashionStore/emailtemplateImages/products/man-large_ke7igc.jpg"
-                    alt=""
-                  />
+                  <img src="https://i.imgur.com/KCZvezR.jpeg" alt="" />
                 </div>
                 {/* <div className="col-4 mt-3 mb-3   "  >
                                     <img src="https://res.cloudinary.com/dxqwnvudu/image/upload/v1587120874/FashionStore/emailtemplateImages/products/women-2_cnyyq9.jpg"  alt="" />
                                 </div> */}
                 <div className="col-4 mt-3 mb-3   ">
-                  <img
-                    src="https://res.cloudinary.com/dxqwnvudu/image/upload/v1587120978/FashionStore/emailtemplateImages/mains/offer02c_k5sojh.png"
-                    alt=""
-                  />
+                  <img src="https://i.imgur.com/G7yDpqP.jpg" alt="" />
                 </div>
               </div>
             </div>
